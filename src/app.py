@@ -25,7 +25,7 @@ current_dir = Path(__file__).parent
 sys.path.insert(0, str(current_dir))
 
 # Change working directory to src folder
-os.chdir(str(current_dir))
+#os.chdir(str(current_dir))
 
 from model_utils import load_model, load_metrics, validate_input_ranges, prepare_input_features
 from train import main as train_model_main
@@ -463,3 +463,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
