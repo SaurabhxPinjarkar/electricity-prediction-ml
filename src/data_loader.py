@@ -11,6 +11,7 @@ This module handles:
 
 import pandas as pd
 import numpy as np
+import os
 from pathlib import Path
 from typing import Tuple, Optional
 from sklearn.model_selection import train_test_split
@@ -54,8 +55,14 @@ class DataLoader:
                 self.data_dir / 'dataset' / 'LATEST_DATASET_ENERGY' / 'energy_dataset.csv',
                 self.data_dir / 'energy_dataset.csv',
                 self.data_dir / 'dataset.csv',
-                Path(r's:\Saurabh Pinjarkar\dataset\LATEST_DATASET_ENERGY\energy_dataset.csv')  # Local path
             ]
+            
+            # Add Windows local path only if on Windows
+            if os.name == 'nt':
+                possible_paths.append(Path(r's:\Saurabh Pinjarkar\dataset\LATEST_DATASET_ENERGY\energy_dataset.csv'))
+            
+            # Remove the trailing empty list item
+            possible_paths = [p for p in possible_paths if p]
             
             for path in possible_paths:
                 if Path(path).exists():
@@ -96,8 +103,11 @@ class DataLoader:
                 self.data_dir / 'data' / 'weather_features.csv',
                 self.data_dir / 'dataset' / 'LATEST_DATASET_ENERGY' / 'weather_features.csv',
                 self.data_dir / 'weather_features.csv',
-                Path(r's:\Saurabh Pinjarkar\dataset\LATEST_DATASET_ENERGY\weather_features.csv')  # Local path
             ]
+            
+            # Add Windows local path only if on Windows
+            if os.name == 'nt':
+                possible_paths.append(Path(r's:\Saurabh Pinjarkar\dataset\LATEST_DATASET_ENERGY\weather_features.csv'))
             
             for path in possible_paths:
                 if Path(path).exists():
