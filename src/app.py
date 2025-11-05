@@ -88,7 +88,11 @@ def train_model_callback():
     with st.spinner("Training model... This may take a few minutes."):
         try:
             model_path = Path(__file__).parent / 'model.pkl'
-            model, metrics = train_model_main(output_path=str(model_path), n_iter=5)
+            model, metrics = train_model_main(
+    output_path=str(model_path), 
+    hyperparameter_tuning=False,
+    n_iter=2
+)
             st.success("✅ Model trained successfully!")
             st.cache_resource.clear()
             st.cache_data.clear()
@@ -463,4 +467,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
