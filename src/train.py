@@ -95,15 +95,10 @@ def train_model(X_train, y_train, hyperparameter_tuning=True, n_iter=10, cv=3, v
         print("\nTraining model with default parameters...")
         
         model = RandomForestRegressor(
-            n_estimators=200,
-            max_depth=20,
-            min_samples_split=5,
-            min_samples_leaf=2,
-            max_features='sqrt',
-            random_state=42,
-            n_jobs=-1,
-            verbose=verbose
-        )
+    n_estimators=50,
+    max_depth=15,
+    ...
+    n_jobs=2,
         
         start_time = time.time()
         model.fit(X_train, y_train)
@@ -304,3 +299,4 @@ if __name__ == "__main__":
         hyperparameter_tuning=not args.no_tuning,
         n_iter=args.n_iter
     )
+
