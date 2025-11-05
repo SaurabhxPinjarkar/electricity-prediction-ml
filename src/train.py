@@ -92,13 +92,18 @@ def train_model(X_train, y_train, hyperparameter_tuning=True, n_iter=10, cv=3, v
         
         model = rf_search.best_estimator_
     else:
-        print("\nTraining model with default parameters...")
+        print("\nTraining model with default parameters (optimized for Streamlit Cloud)...")
         
         model = RandomForestRegressor(
-    n_estimators=50,
-    max_depth=15,
-    ...
-    n_jobs=2,
+            n_estimators=50,  # Reduced from 200 for faster training
+            max_depth=15,     # Reduced from 20 to save memory
+            min_samples_split=5,
+            min_samples_leaf=2,
+            max_features='sqrt',
+            random_state=42,
+            n_jobs=2,         # Reduced from -1 to limit CPU usage
+            verbose=verbose
+        )
         
         start_time = time.time()
         model.fit(X_train, y_train)
@@ -299,4 +304,3 @@ if __name__ == "__main__":
         hyperparameter_tuning=not args.no_tuning,
         n_iter=args.n_iter
     )
-
