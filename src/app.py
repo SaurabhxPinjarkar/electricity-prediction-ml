@@ -210,8 +210,86 @@ def train_model_callback():
             st.error(f"❌ Training failed: {str(e)}")
 
 
-def show_start_screen():
-    """Display the start/welcome screen with team information"""
+def show_start_screen_native():
+    """Display the start/welcome screen with team information - Native Streamlit Version"""
+    
+    # Empty space for centering
+    st.write("")
+    st.write("")
+    
+    # Main Title - Using native Streamlit
+    st.markdown("# ⚡ Electricity Consumption Predictor")
+    st.markdown("### AI-Powered Energy Demand Forecasting System")
+    
+    st.write("")
+    st.divider()
+    st.write("")
+    
+    # Team Section
+    st.markdown("## 👥 Project Team")
+    st.write("")
+    
+    # Display all team members equally in a nice grid
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        st.info("""
+        **Saurabh Pinjarkar**  
+        PRN: 202301060013  
+        📧 saurabhpinjarkarx@gmail.com
+        """)
+        
+        st.info("""
+        **Shreyash Badve**  
+        PRN: 202301060011
+        """)
+    
+    with col2:
+        st.info("""
+        **Omkar Jagadale**  
+        PRN: 202301060009
+        """)
+        
+        st.info("""
+        **Sujit Pal**  
+        PRN: 202301060002
+        """)
+    
+    st.write("")
+    st.divider()
+    st.write("")
+    
+    # Features Section
+    st.markdown("## 🎯 Key Features")
+    st.write("")
+    
+    col1, col2, col3, col4 = st.columns(4)
+    
+    with col1:
+        st.success("**🎯 Accurate**  \n92%+ Prediction Accuracy")
+    
+    with col2:
+        st.success("**⚡ Fast**  \nReal-time Predictions")
+    
+    with col3:
+        st.success("**📊 Insightful**  \nDetailed Analytics")
+    
+    with col4:
+        st.success("**🤖 Smart**  \nAI-Powered ML Model")
+    
+    st.write("")
+    st.write("")
+    
+    # Launch Button - Large and centered
+    col1, col2, col3 = st.columns([1, 2, 1])
+    with col2:
+        if st.button("🚀 Launch Application", use_container_width=True, type="primary", key="start_btn"):
+            st.session_state.show_main_app = True
+            st.rerun()
+
+# Keep old HTML version for reference (commented out)
+def show_start_screen_old():
+    """Old HTML version - had rendering issues on Streamlit Cloud"""
     
     # Full-screen start screen with centered content
     st.markdown("""
@@ -382,7 +460,7 @@ def main():
     
     # Show start screen if not dismissed
     if not st.session_state.show_main_app:
-        show_start_screen()
+        show_start_screen_native()
         return
     
     # Header
