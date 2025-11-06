@@ -24,8 +24,8 @@ import os
 current_dir = Path(__file__).parent
 sys.path.insert(0, str(current_dir))
 
-# Change working directory to src folder
-#os.chdir(str(current_dir))
+# DON'T change directory - causes path issues on Streamlit Cloud
+# os.chdir(str(current_dir))
 
 from model_utils import load_model, load_metrics, validate_input_ranges, prepare_input_features
 from train import main as train_model_main
@@ -39,27 +39,135 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS
+# Custom CSS - Enhanced Design
 st.markdown("""
 <style>
+    /* Main Header Styling */
     .main-header {
-        font-size: 3rem;
-        font-weight: bold;
-        color: #1f77b4;
+        font-size: 3.5rem;
+        font-weight: 900;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
         text-align: center;
-        margin-bottom: 1rem;
+        margin-bottom: 0.5rem;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
     }
+    
     .sub-header {
-        font-size: 1.2rem;
-        color: #666;
+        font-size: 1.3rem;
+        color: #555;
         text-align: center;
         margin-bottom: 2rem;
+        font-weight: 300;
     }
+    
+    /* Metric Cards */
     .metric-card {
-        background-color: #f0f2f6;
-        padding: 1rem;
-        border-radius: 0.5rem;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        padding: 1.5rem;
+        border-radius: 15px;
         margin: 0.5rem 0;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease;
+    }
+    
+    .metric-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 12px rgba(0,0,0,0.15);
+    }
+    
+    /* Success/Error Messages */
+    .stSuccess {
+        background-color: #d4edda;
+        border-left: 5px solid #28a745;
+        padding: 1rem;
+        border-radius: 5px;
+    }
+    
+    .stError {
+        background-color: #f8d7da;
+        border-left: 5px solid #dc3545;
+        padding: 1rem;
+        border-radius: 5px;
+    }
+    
+    /* Tabs Styling */
+    .stTabs [data-baseweb="tab-list"] {
+        gap: 10px;
+    }
+    
+    .stTabs [data-baseweb="tab"] {
+        height: 50px;
+        background-color: #f0f2f6;
+        border-radius: 10px 10px 0 0;
+        padding: 10px 20px;
+        font-weight: 600;
+    }
+    
+    .stTabs [aria-selected="true"] {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+    }
+    
+    /* Sidebar Styling */
+    [data-testid="stSidebar"] {
+        background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+    }
+    
+    [data-testid="stSidebar"] .stMarkdown {
+        color: white;
+    }
+    
+    /* Button Styling */
+    .stButton > button {
+        width: 100%;
+        border-radius: 10px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+    
+    .stButton > button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    
+    /* Input Fields */
+    .stNumberInput > div > div > input,
+    .stDateInput > div > div > input,
+    .stTimeInput > div > div > input,
+    .stSlider > div > div {
+        border-radius: 8px;
+    }
+    
+    /* Prediction Result Box */
+    .prediction-box {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 2rem;
+        border-radius: 20px;
+        text-align: center;
+        font-size: 2.5rem;
+        font-weight: bold;
+        box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        margin: 2rem 0;
+    }
+    
+    /* Info Cards */
+    .info-card {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        margin: 1rem 0;
+    }
+    
+    /* Footer */
+    .footer {
+        text-align: center;
+        padding: 2rem 0;
+        color: #888;
+        font-size: 0.9rem;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -85,14 +193,15 @@ def load_metrics_cached():
 
 def train_model_callback():
     """Callback to train model."""
-    with st.spinner("Training model... This may take a few minutes."):
+    with st.spinner("Training model... This may take 1-2 minutes."):
         try:
             model_path = Path(__file__).parent / 'model.pkl'
+            # Use n_iter=2 and hyperparameter_tuning=False for faster training on Streamlit Cloud
             model, metrics = train_model_main(
-    output_path=str(model_path), 
-    hyperparameter_tuning=False,
-    n_iter=2
-)
+                output_path=str(model_path), 
+                hyperparameter_tuning=False,  # Skip hyperparameter tuning to save time/memory
+                n_iter=2
+            )
             st.success("✅ Model trained successfully!")
             st.cache_resource.clear()
             st.cache_data.clear()
@@ -467,5 +576,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
