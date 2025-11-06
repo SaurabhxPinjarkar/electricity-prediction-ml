@@ -326,25 +326,21 @@ def show_start_screen():
         <div class="start-subtitle">AI-Powered Energy Demand Forecasting System</div>
         
         <div class="team-section">
-            <div class="team-title">👨‍💻 Project Team</div>
+            <div class="team-title">� Project Team</div>
             
-            <div class="project-lead">
-                <strong>🌟 Project Lead:</strong><br>
-                <strong>Saurabh Pinjarkar</strong><br>
-                PRN: 202301060013<br>
+            <div class="team-member">
+                <strong>Saurabh Pinjarkar</strong> - PRN: 202301060013<br>
                 <div class="email-info">📧 saurabhpinjarkarx@gmail.com</div>
-            </div>
-            
-            <div style="margin-top: 25px;">
-                <strong style="font-size: 1.2rem;">👥 Team Members:</strong>
             </div>
             
             <div class="team-member">
                 <strong>Omkar Jagadale</strong> - PRN: 202301060009
             </div>
+            
             <div class="team-member">
                 <strong>Shreyash Badve</strong> - PRN: 202301060011
             </div>
+            
             <div class="team-member">
                 <strong>Sujit Pal</strong> - PRN: 202301060002
             </div>
@@ -913,30 +909,13 @@ def main():
         This project was developed by a dedicated team of students:
         """)
         
-        # Team information in styled cards
-        st.markdown("""
-        <div style='background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
-                    padding: 25px; border-radius: 15px; margin: 20px 0;'>
-            <h3 style='color: white; margin: 0;'>🌟 Project Lead</h3>
-            <div style='background: rgba(255,255,255,0.2); padding: 15px; 
-                        border-radius: 10px; margin-top: 15px; color: white;'>
-                <strong style='font-size: 1.2rem;'>Saurabh Pinjarkar</strong><br>
-                PRN: 202301060013<br>
-                📧 <a href='mailto:saurabhpinjarkarx@gmail.com' 
-                      style='color: #FFD700; text-decoration: none;'>
-                      saurabhpinjarkarx@gmail.com
-                   </a>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        st.markdown("**👥 Team Members:**")
-        
+        # Team information - All members equal
         col1, col2 = st.columns(2)
         with col1:
-            st.info("**Omkar Jagadale**\nPRN: 202301060009")
+            st.info("**Saurabh Pinjarkar**\nPRN: 202301060013\n📧 saurabhpinjarkarx@gmail.com")
             st.info("**Shreyash Badve**\nPRN: 202301060011")
         with col2:
+            st.info("**Omkar Jagadale**\nPRN: 202301060009")
             st.info("**Sujit Pal**\nPRN: 202301060002")
         
         st.markdown("""
@@ -946,7 +925,6 @@ def main():
         
         For questions, feedback, or collaboration:
         - **Email:** saurabhpinjarkarx@gmail.com
-        - **Project Lead:** Saurabh Pinjarkar
         
         ---
         
@@ -964,10 +942,10 @@ def main():
                     background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); 
                     border-radius: 10px; margin-top: 20px;'>
             <p style='margin: 0; font-weight: bold;'>
-                💡 Built with passion by Team Saurabh Pinjarkar 💡
+                💡 Electricity Consumption Prediction Project 💡
             </p>
             <p style='margin: 5px 0 0 0; font-size: 0.9rem; color: #666;'>
-                Electricity Consumption Prediction using Machine Learning
+                Machine Learning • Data Science • Energy Forecasting
             </p>
         </div>
         """, unsafe_allow_html=True)
